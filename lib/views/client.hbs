@@ -2,26 +2,55 @@
 <html>
 
 <head>
-    <title>client</title>
+	<title>client</title>
 </head>
 
 <body>
 
-    <h1>模拟收集页面</h1>
-
+	<h1>模拟收集页面</h1>
 </body>
 <style>
-    pre {
-        font-family: monospace;
-        background-color: #f5f5f5;
-        color: #333;
-        padding: 10px;
-        border-radius: 5px;
-    }
+	pre {
+		font-family: monospace;
+		background-color: #f5f5f5;
+		color: #333;
+		padding: 10px;
+		border-radius: 5px;
+	}
 </style>
 <script>
-	window.ws = new WebSocket("ws://127.0.0.1:3000?versionName=ios-test-0.1&fingerprint=666666")
+
+
+	function connectWebSocket() {
+		const ws = new WebSocket("ws://127.0.0.1:8888?versionName=ios-test-0.1&fingerprint=666666")
+		window.ws = ws;
+		ws.onopen = function () {
+			console.log("ws is open");
+		};
+		ws.onmessage = function (e) {
+			console.log("from server: " + e.data);
+			var message = JSON.parse(e.data);
+			if (message.event == "collect") {
+				ws.send("测试数据:");
+			} else if (message.event == "reset") {
+				console.log("reset")
+			}
+		};
+
+		// 监听 close 事件
+		ws.addEventListener("close", function (event) {
+			console.log("WebSocket disconnected");
+
+			// 等待一定时间后重新连接
+			setTimeout(function () {
+				console.log("trying to reconnect...");
+				connectWebSocket();
+			}, 5000); // 等待 3 秒后重新连接
+		});
+	}
+
+	connectWebSocket()
 
 </script>
 
-</html>	
+</html>
