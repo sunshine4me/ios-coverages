@@ -21,6 +21,8 @@
 <script>
 
 
+	let coverageData = "";
+
 	function connectWebSocket() {
 		const ws = new WebSocket("ws://127.0.0.1:8888?versionName=ios-test-0.1&fingerprint=666666")
 		window.ws = ws;
@@ -31,7 +33,7 @@
 			console.log("from server: " + e.data);
 			var message = JSON.parse(e.data);
 			if (message.event == "collect") {
-				ws.send("测试数据:");
+				ws.send(coverageData);
 			} else if (message.event == "reset") {
 				console.log("reset")
 			}
@@ -48,6 +50,17 @@
 			}, 5000); // 等待 3 秒后重新连接
 		});
 	}
+
+
+	fetch('static/file.profraw')
+		.then(response => response.arrayBuffer())
+		.then(buffer => {
+			coverageData = buffer;
+			console.log("coverageData is ok");
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
 
 	connectWebSocket()
 

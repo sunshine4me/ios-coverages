@@ -28,9 +28,16 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "test_iosAnalysisService",
+      "name": "test",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/test/test_iosAnalysisService.js"
+      "program": "${workspaceFolder}/test.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "test_iosAnalysis",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/test/test_iosAnalysis.js"
     }
   ]
 }
