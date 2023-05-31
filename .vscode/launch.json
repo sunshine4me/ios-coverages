@@ -1,0 +1,36 @@
+{
+  // 使用 IntelliSense 了解相关属性。
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "启动程序",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/lib/index.js",
+      "args": [
+        "--db.host",
+        "172.21.0.61",
+        "--db.database",
+        "ios-dev",
+        "--db.username",
+        "root",
+        "--db.password",
+        "123456",
+        "--redis.host",
+        "172.21.0.61",
+        "--redis.password",
+        "%20#m5yW7",
+    ],
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "test_iosAnalysisService",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/test/test_iosAnalysisService.js"
+    }
+  ]
+}

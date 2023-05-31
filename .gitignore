@@ -1,9 +1,8 @@
 node_modules/
-coverage
-.nyc_output
 package-lock.json
-.vscode
 /test*.js
-/data
-report_source
-dist
+temp/*
+!temp/.gitkeep
+objectFiles/*
+!objectFiles/.gitkeep
+!objectFiles/test_objectfile
